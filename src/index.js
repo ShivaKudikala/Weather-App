@@ -119,14 +119,13 @@ function displayForecast(data) {
     for (const day in daysMap) {
         const forecastData = daysMap[day];
         ForecastDiv.innerHTML += `
-            <div class="bg-gray-500 w-1/5 m-2 p-2 flex flex-col justify-center items-center">
+            <div class="w-1/5 m-2 md:m-1 p-2 lg:w-1/4 lg:m-2 bg-gray-400 flex flex-col justify-center items-center">
                 <h3 class="font-bold">${forecastData.date}</h3>
                 <img src="https://openweathermap.org/img/wn/${forecastData.icon}@2x.png" alt="${forecastData.description}">
                 <p>Temp: ${forecastData.temp} °C</p>
-                <p>Humidity: ${forecastData.humidity}%</p>
                 <p>Wind: ${forecastData.wind} m/s</p>
-            </div>
-        `;
+                <p>Humidity: ${forecastData.humidity}%</p>
+            </div>`;
     }
 }
 
