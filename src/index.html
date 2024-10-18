@@ -6,6 +6,7 @@
     <title>WeatherNow</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./output.css">
+    <link rel="icon" type="image/x-icon" href="./images/icon.webp">
 </head>
 <body class="bg-[url('./images/bg-1.jpg')] bg-cover bg-no-repeat">
 
@@ -17,7 +18,12 @@
         <section class="search-section flex flex-col bg-blue-200 w-11/12 lg:w-1/3 lg:mt-20 lg:ml-20 lg:mr-10">
             <h1 class="font-bold ml-4 mt-5">Enter a City Name</h1>
             <input class="border-solid border-2 border-sky-500 m-4" type="text" name="search" id="input" placeholder="Eg. Hyderabad, London etc.">
+            <div id="recent-searches" class="ml-4 w-full">
+                <select id="city-dropdown" style="display: none;">
+                </select>
+            </div>
             <button class="search-btn m-4 bg-blue-500 pt-3 pb-3 font-bold text-white">Search</button>
+
             <p class="text-center">---------- Or ----------</p>
             <button class="location-btn m-4 bg-gray-400 p-2 font-bold">Use Current Location</button>
         </section>
@@ -39,7 +45,6 @@
                 <div id="forecast" class="flex flex-col md:flex md:flex-row justify-between text-white">
                      
                 </div>
-                 <!-- This div will hold the forecast data -->
             </section>
         </div>
         

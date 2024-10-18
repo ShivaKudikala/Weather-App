@@ -18,6 +18,11 @@ const ForecastDiv = document.querySelector("#forecast"); // For the 5-day foreca
 
 const FullForecast = document.querySelector("#full-forecast");
 
+const cityDropdown = document.getElementById('city-dropdown');
+const recentSearchesDiv = document.getElementById('recent-searches');
+
+document.addEventListener('DOMContentLoaded', initializeDropdown);
+
 const ApiKey = '2ef9063df0f763a1f287353c9ca53e46';
 const today = new Date().toLocaleDateString("en-IN", {weekday: 'long', month: 'short', day: 'numeric'});
 
@@ -32,6 +37,9 @@ async function GetWeatherByInput() {
         alert("Please Enter Location");
         return;
     }
+    InputValue.value = " ";
+    addToSessionStorage(Location);
+    populateDropdown();
 
     // URL for current weather
     const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${Location}&APPID=${ApiKey}&units=metric`;
@@ -189,3 +197,46 @@ async function GetWeatherByLocation() {
     }
 }
 
+
+// Function to add city to session storage
+function addToSessionStorage(city) {
+    let cities = JSON.parse(sessionStorage.getItem('cities')) || [];
+
+    // Add the city to session storage if it doesn't already exist
+    if (!cities.includes(city)) {
+        cities.push(city);
+        sessionStorage.setItem('cities', JSON.stringify(cities));
+    }
+}
+
+// Function to populate dropdown with cities from session storage
+function populateDropdown() {
+    let cities = JSON.parse(sessionStorage.getItem('cities')) || [];
+
+    // Clear the dropdown before populating it again
+    cityDropdown.innerHTML = '';
+
+    if (cities.length > 0) {
+        cityDropdown.style.display = 'block'; // Show the dropdown if cities are present
+
+        cities.forEach(city => {
+            const option = document.createElement('option');
+            option.value = city;
+            option.textContent = city;
+            cityDropdown.appendChild(option);
+        });
+    } else {
+        cityDropdown.style.display = 'none'; // Hide dropdown if no cities
+    }
+}
+
+// Function to initialize the dropdown on page load
+function initializeDropdown() {
+    populateDropdown();
+
+    // Add an event listener to the dropdown to fetch weather for the selected city
+    cityDropdown.addEventListener('change', function() {
+        const selectedCity = cityDropdown.value;
+        InputValue.value = selectedCity;
+    });
+}
