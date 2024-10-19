@@ -4,42 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeatherNow</title>
+    <meta name="description" content="A user-friendly weather app providing real-time and 5-day forecasts, including temperature, wind, and humidity data for multiple locations.">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./output.css">
-    <link rel="icon" type="image/x-icon" href="./images/icon.webp">
+    <link rel="icon" type="image/x-icon" href="./images/icon.jpg">
 </head>
-<body class="bg-[url('./images/bg-1.jpg')] bg-cover bg-no-repeat">
+<body class="bg-[url('./images/bg-1.jpg')] bg-cover min-h-screen">
 
+    <!-- ****Header Section******* -->
     <header class="text-center">
         <h1 class="pb-3 pt-10 font-bold underline text-2xl sm:text-3xl text-black">WeatherNow : Your Personal Weather Guide</h1>
     </header>
 
+    <!-- *****Main Section***** -->
     <main class="weather-div flex flex-col lg:flex  lg:flex-row items-center m-2 justify-evenly lg:items-center lg:justify-evenly">
-        <section class="search-section flex flex-col bg-blue-200 w-11/12 lg:w-1/3 lg:mt-20 lg:ml-20 lg:mr-10">
+
+        <!-- *******Search Location Section******* -->
+        <section class="search-section flex flex-col bg-blue-200 w-11/12 lg:w-1/3 lg:mt-20 lg:ml-20 lg:mr-10 shadow-lg shadow-red-400">
             <h1 class="font-bold ml-4 mt-5">Enter a City Name</h1>
             <input class="border-solid border-2 border-sky-500 m-4" type="text" name="search" id="input" placeholder="Eg. Hyderabad, London etc.">
             <div id="recent-searches" class="ml-4 w-full">
                 <select id="city-dropdown" style="display: none;">
                 </select>
             </div>
-            <button class="search-btn m-4 bg-blue-500 pt-3 pb-3 font-bold text-white">Search</button>
+            <button class="search-btn m-4 bg-blue-500 pt-3 pb-3 font-bold text-white hover:bg-violet-600 transition ease-in-out delay-150 duration-300">Search</button>
 
             <p class="text-center">---------- Or ----------</p>
-            <button class="location-btn m-4 bg-gray-400 p-2 font-bold">Use Current Location</button>
+            <button class="location-btn m-4 bg-gray-400 p-2 font-bold hover:bg-gray-500 transition ease-in-out delay-150 duration-300">Use Current Location</button>
         </section>
-        <div class="bg-blue-200 w-11/12 mt-10 lg:mr-20 lg:mt-20 hidden"  id="full-forecast">
+
+        <!-- *******Displaying Weather Forecast Section ********* -->
+
+        <div class="bg-blue-200 w-11/12 mt-10 lg:mr-20 lg:mt-20 hidden shadow-lg shadow-red-400"  id="full-forecast">
+
+            <!-- *********Current Day Forecast********* -->
             <section class="m-5 display-section flex flex-col md:flex md:flex-row items-center justify-between bg-blue-500 w-12/12">
                 <div class="info-div p-5 text-white">
-                    <h2 class="location-name m-2 font-bold text-xl underline">Location</h2>
-                    <p class="location-temp m-2">Temperature</p>
-                    <p class="location-wind m-2">Wind</p>
-                    <p class="location-humidity m-2">Humidity</p>
+                    <h2 class="location-name m-2 font-bold text-xl underline"></h2>
+                    <p class="location-temp m-2"></p>
+                    <p class="location-wind m-2"></p>
+                    <p class="location-humidity m-2"></p>
                 </div>
                 <div class="flex flex-col justify-center items-center mr-10">
-                    <img class="weather-icon" src="" alt="Weather_condition_img">
-                    <p class="weather-condition mb-4 text-white">Slight rain</p>
+                    <img class="weather-icon" src="" alt="">
+                    <p class="weather-condition mb-4 text-white"></p>
                 </div>        
             </section>
+
+            <!-- ***********5 day Extended Forecast********** -->
             <section class= "m-5 extended-forecast">
                 <h2 class="font-bold underline m-2 text-xl">5-Day Weather Forecast:</h2>
                 <div id="forecast" class="flex flex-col md:flex md:flex-row justify-between text-white">

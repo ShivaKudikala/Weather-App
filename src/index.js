@@ -10,6 +10,8 @@ const LocationName = document.querySelector(".location-name");
 
 const LocationTemp = document.querySelector(".location-temp");
 
+const LocationIcon = document.querySelector(".weather-icon");
+
 const LocationWind = document.querySelector(".location-wind");
 
 const LocationHumidity = document.querySelector(".location-humidity");
@@ -38,8 +40,7 @@ async function GetWeatherByInput() {
         return;
     }
     InputValue.value = " ";
-    addToSessionStorage(Location);
-    populateDropdown();
+    
 
     // URL for current weather
     const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${Location}&APPID=${ApiKey}&units=metric`;
@@ -58,9 +59,17 @@ async function GetWeatherByInput() {
 
         if (data.cod === "404" || data.cod === "401") {
             LocationName.innerHTML = "Location not found. Please enter a valid location!";
+            // Making other elements empty
+            LocationTemp.innerHTML = " ";
+            LocationWind.innerHTML = " ";
+            LocationHumidity.innerHTML = " ";
+            LocationIcon.src = "";
+            document.querySelector(".weather-condition").innerHTML = "";
+            ForecastDiv.innerHTML = "";
             return;
         }
-
+        addToSessionStorage(Location);
+        populateDropdown();
         // Display Current Weather
         LocationName.innerHTML = `Location: ${data.name}, ${data.sys.country} (${today})`;
         LocationTemp.innerHTML = `Temperature: ${data.main.temp}°C`;
@@ -68,7 +77,7 @@ async function GetWeatherByInput() {
         LocationHumidity.innerHTML = `Humidity: ${data.main.humidity}%`;
 
         // Display Weather Icon
-        const LocationIcon = document.querySelector(".weather-icon");
+        
         const iconCode = data.weather[0].icon;
         const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
         LocationIcon.src = iconUrl;
@@ -137,7 +146,7 @@ function displayForecast(data) {
     }
 }
 
-    // Get weather by current location (geolocation)
+// Get weather by current location (geolocation)
 async function GetWeatherByLocation() {
 
 
